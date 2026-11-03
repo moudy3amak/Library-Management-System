@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <h1>Library Management System</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="add_book.html">Add Book</a>
+            <a href="view_books.html" class="active">View Books</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="search-section">
+            <h2>Explore Collection</h2>
+            <div class="search-bar-container">
+                <input type="text" id="searchInput" placeholder="Search by Title, Author, or ISBN..." oninput="handleSearch()">
+                <select id="categoryFilter" onchange="handleSearch()">
+                    <option value="">All Categories</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-Fiction">Non-Fiction</option>
+                    <option value="Science">Science</option>
+                    <option value="Technology">Technology</option>
+                    <option value="History">History</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="books-display">
+            <div id="loading" class="spinner" style="display: none;">Loading...</div>
+            <div id="bookGrid" class="book-grid"></div>
+            <p id="noResults" class="no-results" style="display: none;">No books found.</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

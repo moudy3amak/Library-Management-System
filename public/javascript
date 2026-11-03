@@ -1,0 +1,58 @@
+document.addEventListener('DOMContentLoaded', () => fetchBooks());
+
+async function fetchBooks(query = '', category = '') {
+    const grid = document.getElementById('bookGrid');
+    const loading = document.getElementById('loading');
+    const noResults = document.getElementById('noResults');
+
+    grid.innerHTML = '';
+    loading.style.display = 'block';
+    noResults.style.display = 'none';
+
+    try {
+        const res = await fetch(`/api/books?search=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`);
+        const books = await res.json();
+        
+        loading.style.display = 'none';
+        
+        if (books.length === 0) {
+            noResults.style.display = 'block';
+            return;
+        }
+
+        books.forEach(b => {
+            const card = document.createElement('div');
+            card.className = 'book-card';
+            card.innerHTML = `
+                <span class="badge">${escapeHtml(b.category)}</span>
+                <h3>${escapeHtml(b.title)}</h3>
+                <p><strong>Author:</strong> ${escapeHtml(b.author)}</p>
+                <p><strong>ISBN:</strong> ${escapeHtml(b.isbn)}</p>
+                <span class="status ${b.is_available ? 'available' : 'borrowed'}">
+                    ${b.is_available ? 'Available' : 'Borrowed'}
+                </span>
+            `;
+            grid.appendChild(card);
+        });
+    } catch (e) {
+        loading.style.display = 'none';
+        grid.innerHTML = `<p class="error">Error loading books.</p>`;
+    }
+}
+
+function handleSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    const c = document.getElementById('categoryFilter').value;
+    fetchBooks(q, c);
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    return text.replace(/[&<>"']/g, m => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    }[m]));
+}
