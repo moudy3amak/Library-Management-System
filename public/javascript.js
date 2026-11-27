@@ -63,3 +63,8 @@ function escapeHtml(text) {
         "'": '&#039;'
     }[m]));
 }
+
+async function deleteBook(book) {
+  if (!confirm(`Delete "${book.title}"?`)) return;
+  await sendChange(`/api/books/${book.id}`, { method: "DELETE" });
+}
