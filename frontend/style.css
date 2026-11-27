@@ -1,4 +1,3 @@
-```css
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f4f7;
@@ -35,6 +34,11 @@ input {
     border-radius: 5px;
 }
 
+input:focus {
+    outline: 2px solid #8ba8c0;
+    border-color: #263849;
+}
+
 button {
     width: 100%;
     margin-top: 22px;
@@ -49,4 +53,27 @@ button {
 button:hover {
     background-color: #3e5a70;
 }
-```
+
+button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+.form-message {
+    min-height: 1.25em;
+    margin-top: 14px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.form-message.success {
+    color: #176b3a;
+}
+
+.form-message.error {
+    color: #b42318;
+}
+
+.form-message.info {
+    color: #344054;
+}
