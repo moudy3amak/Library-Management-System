@@ -28,9 +28,14 @@ async function fetchBooks(query = '', category = '') {
                 <h3>${escapeHtml(b.title)}</h3>
                 <p><strong>Author:</strong> ${escapeHtml(b.author)}</p>
                 <p><strong>ISBN:</strong> ${escapeHtml(b.isbn)}</p>
-                <span class="status ${b.is_available ? 'available' : 'borrowed'}">
-                    ${b.is_available ? 'Available' : 'Borrowed'}
+                <span class="status ${b.is_available ? "available" : "borrowed"}">
+                    ${b.is_available ? "Available" : "Borrowed"}
                 </span>
+                
+                <div class="actions">
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
             `;
             grid.appendChild(card);
         });
