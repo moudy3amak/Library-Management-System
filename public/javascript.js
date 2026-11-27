@@ -92,3 +92,13 @@ async function editBook(book) {
     body: JSON.stringify(updated),
   });
 }
+
+async function sendChange(url, options) {
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) throw new Error();
+    handleSearch();
+  } catch {
+    alert("Could not save the change.");
+  }
+}
