@@ -31,12 +31,14 @@ async function fetchBooks(query = '', category = '') {
                 <span class="status ${b.is_available ? "available" : "borrowed"}">
                     ${b.is_available ? "Available" : "Borrowed"}
                 </span>
-                
+
                 <div class="actions">
                     <button class="edit-btn">Edit</button>
                     <button class="delete-btn">Delete</button>
                 </div>
             `;
+            card.querySelector('.edit-btn').addEventListener('click', () => editBook(b));
+            card.querySelector('.delete-btn').addEventListener('click', () => deleteBook(b));
             grid.appendChild(card);
         });
     } catch (e) {
